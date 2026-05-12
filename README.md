@@ -14,26 +14,46 @@ Production-oriented, detection-only toolkit for Linux privilege escalation risk 
 - `docs/` - Project docs and architecture.
 - `reports/` - Generated scan reports.
 
-## Next Steps
+## 🚀 How to Run (Kali Linux / Target Machine)
 
-1. Implement CLI entrypoint and scan orchestration.
-2. Add module-by-module checks.
-3. Add analyzer severity framework.
-4. Add deterministic report output.
+**Important Note on Scanning vs. Dashboarding:** 
+This is a Linux Privilege Escalation Toolkit. The scanner relies on native Linux commands (`find`, `systemctl`, `getcap`, etc.). Therefore, **the scan MUST be run in the terminal of the target Linux machine (e.g., Kali Linux).** 
 
-## Run (Current Milestone)
+While you could technically add a "Run Scan" button to the Streamlit app, if the app is hosted in the cloud (like Streamlit Community Cloud) or running on Windows, the button would only scan the cloud server or fail on Windows! 
 
-- `python -m privesc_toolkit.main --scan baseline`
-- `python -m privesc_toolkit.main --scan system-info`
-- `python -m privesc_toolkit.main --scan suid-sgid`
-- `python -m privesc_toolkit.main --scan permissions`
-- `python -m privesc_toolkit.main --scan sudo`
-- `python -m privesc_toolkit.main --scan cron`
-- `python -m privesc_toolkit.main --scan services`
-- `python -m privesc_toolkit.main --scan capabilities`
-- `python -m privesc_toolkit.main --scan kernel`
-- `python -m privesc_toolkit.main --scan baseline --output reports/scan.json`
+The proper workflow is:
+1. Run the scanner in the Linux terminal.
+2. Generate the JSON report.
+3. View the report in the Streamlit Dashboard.
 
-Each run now exports:
-- JSON report: `reports/<name>.json`
-- Executive markdown report: `reports/<name>.md`
+### 🐧 Kali Linux Tutorial (Step-by-Step)
+
+**Step 1: Clone the repository to your Kali VM**
+Open your terminal in Kali Linux and run:
+```bash
+git clone https://github.com/aryancodesit/Linux-privilege-escalation-automation-toolkit.git
+cd Linux-privilege-escalation-automation-toolkit
+```
+
+**Step 2: Run a Full Baseline Scan**
+To run all privilege escalation checks (SUID, cron, sudo, services, etc.) and generate a report, use the following command:
+```bash
+python3 -m privesc_toolkit.main --scan baseline
+```
+*Note: This will automatically create a detailed JSON report and a Markdown report in the `reports/` directory.*
+
+**Step 3: Run Specific Modules (Optional)**
+If you only want to test specific vectors, you can run targeted scans:
+- `python3 -m privesc_toolkit.main --scan suid-sgid`
+- `python3 -m privesc_toolkit.main --scan permissions`
+- `python3 -m privesc_toolkit.main --scan sudo`
+- `python3 -m privesc_toolkit.main --scan cron`
+- `python3 -m privesc_toolkit.main --scan kernel`
+
+**Step 4: View the Results in the Dashboard**
+Once the JSON reports are generated in the `reports/` directory, you can start the dashboard locally on Kali:
+```bash
+pip install -r requirements.txt
+python3 -m streamlit run dashboard.py
+```
+This will open a beautiful interactive web interface at `http://localhost:8501` where you can analyze the vulnerabilities!
