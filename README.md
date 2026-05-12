@@ -16,11 +16,6 @@ Production-oriented, detection-only toolkit for Linux privilege escalation risk 
 
 ## 🚀 How to Run (Kali Linux / Target Machine)
 
-**Important Note on Scanning vs. Dashboarding:** 
-This is a Linux Privilege Escalation Toolkit. The scanner relies on native Linux commands (`find`, `systemctl`, `getcap`, etc.). Therefore, **the scan MUST be run in the terminal of the target Linux machine (e.g., Kali Linux).** 
-
-While you could technically add a "Run Scan" button to the Streamlit app, if the app is hosted in the cloud (like Streamlit Community Cloud) or running on Windows, the button would only scan the cloud server or fail on Windows! 
-
 The proper workflow is:
 1. Run the scanner in the Linux terminal.
 2. Generate the JSON report.
