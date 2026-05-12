@@ -51,4 +51,4 @@ Once the JSON reports are generated in the `reports/` directory, you can start t
 pip install -r requirements.txt
 python3 -m streamlit run dashboard.py
 ```
-This will open a beautiful interactive web interface at `http://localhost:8501` where you can analyze the vulnerabilities!
+This will open a beautiful interactive web interface at `http://localhost:8501` or you can just access the dashboard by clicking on the link shared in the description section where you can analyze the vulnerabilities!
