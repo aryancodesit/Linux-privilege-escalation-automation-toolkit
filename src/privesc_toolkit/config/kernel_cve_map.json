@@ -1,0 +1,15 @@
+{
+  "notes": "Example local mapping rules. Replace with curated advisories for production.",
+  "rules": [
+    {
+      "cve": "CVE-2022-0847",
+      "max_version_inclusive": "5.16.10",
+      "severity": "high",
+      "summary": "Dirty Pipe vulnerability may allow privilege escalation on affected kernels.",
+      "mitigation": "Upgrade kernel to vendor-patched release containing Dirty Pipe fix.",
+      "references": [
+        "https://nvd.nist.gov/vuln/detail/CVE-2022-0847"
+      ]
+    }
+  ]
+}

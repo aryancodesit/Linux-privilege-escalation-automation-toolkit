@@ -1,0 +1,10 @@
+awk
+bash
+find
+less
+nano
+perl
+python
+ruby
+tar
+vim
