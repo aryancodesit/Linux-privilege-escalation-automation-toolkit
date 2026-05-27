@@ -29,15 +29,26 @@ def main():
     
     reports = load_reports()
     
-    if not reports:
-        st.warning("No scan reports found in the 'reports' directory. Please run the scanner first.")
-        return
+    # File Uploader
+    st.sidebar.header("📤 Upload New Scan")
+    uploaded_file = st.sidebar.file_uploader("Upload JSON Report", type="json", help="Drag and drop a JSON report generated from your Kali VM here.")
     
-    # Sidebar for report selection
-    st.sidebar.header("Select Scan Report")
-    selected_report_name = st.sidebar.selectbox("Reports", list(reports.keys()))
-    
-    report_data = reports[selected_report_name]
+    if uploaded_file is not None:
+        try:
+            report_data = json.load(uploaded_file)
+            st.sidebar.success("Successfully loaded uploaded report!")
+        except Exception as e:
+            st.sidebar.error(f"Error loading uploaded report: {e}")
+            return
+    else:
+        if not reports:
+            st.warning("No scan reports found. Please upload a JSON report from your Kali VM using the sidebar.")
+            return
+            
+        # Sidebar for report selection
+        st.sidebar.header("📂 Or Select Existing Report")
+        selected_report_name = st.sidebar.selectbox("Reports", list(reports.keys()))
+        report_data = reports[selected_report_name]
     
     # System Information
     st.header("💻 System Information")
